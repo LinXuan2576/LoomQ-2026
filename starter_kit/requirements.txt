@@ -1,5 +1,10 @@
-# Public evaluator baseline: no third-party dependencies.
-# Add project dependencies below and pin every version exactly, for example:
-# amazon-braket-sdk==<tested-version>
-# spinqit==<tested-version>
-# pyqpanda==<tested-version>
+# LoomQ submission dependencies (pinned).
+#
+# 注意：spinqit==0.2.4 强制依赖 antlr4-python3-runtime==4.9.2，而
+# amazon-braket-sdk 强制 ==4.13.2，两者无法在同一 venv 共存（pip 解析冲突）。
+# 因此这里只 pin braket 系；spinq 后端在本仓库内置无依赖的 statevector
+# 模拟器兜底（见 adapter.py _run_spinq / _run_spinq_sim），评测环境装不上
+# spinqit 时自动降级，分布完全一致。如需真 spinqit，请在 Dockerfile 中用
+# --no-deps 单独安装。
+amazon-braket-sdk==1.110.1
+numpy==1.26.4
