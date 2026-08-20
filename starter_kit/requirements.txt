@@ -8,3 +8,7 @@
 # --no-deps 单独安装。
 amazon-braket-sdk==1.110.1
 numpy==1.26.4
+# 本源后端：pyqpanda==3.8.5 有 cp310 manylinux wheel，评测容器可装；
+# 依赖树不含 antlr，与 braket 无冲突。装不上时 originq_backend 自动返回
+# error 字段而非崩溃（PYQPANDA_AVAILABLE=False 兜底）。
+pyqpanda==3.8.5

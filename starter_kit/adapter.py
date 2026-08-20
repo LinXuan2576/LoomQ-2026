@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """LoomQ submission adapter contract v1.0.
 
-L1 实现状态（增量开发中）：
+L1 实现状态：
 - spinq  : ✅ transpile + run（本地模拟器）
-- originq: 🔜 youneiga 负责（QASM → OriginIR + pyqpanda CPUQVM）
-- braket : 🔜 D2（QASM2.0 → OpenQASM3 改写 + LocalSimulator）
+- originq: ✅ youneiga 交付 originq_backend.py（QASM → OriginIR + pyqpanda CPUQVM），
+           2026-08-20 集成：修 )tran 语法错误、ry 不再分解（避免允许集外 RX）、
+           位序反转修正（实测 pyqpanda 返回 str 且本身小端，反转会变回大端）
+- braket : ✅ D2（QASM2.0 → OpenQASM3 改写 + LocalSimulator）
 
 核心原则：三后端共用同一套统一结果 Schema；meta 禁止 is_mock。
 """
@@ -19,6 +21,8 @@ import tempfile
 import types
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Tuple
+
+import originq_backend
 
 
 SUPPORTED_TARGETS = ("spinq", "originq", "braket")
@@ -36,6 +40,9 @@ def transpile(qasm_str: str, target: str) -> str:
         # Braket 底层是 OpenQASM 3.0，返回改写后的 QASM 3 文本
         # （评测器会自行模拟 transpile 返回值做语义比对，故必须可执行）。
         return _qasm2_to_qasm3(qasm_str)
+    if target == "originq":
+        # 本源后端独立模块（youneiga 交付）：QASM → OriginIR 文本
+        return originq_backend.transpile(qasm_str, target)
     raise NotImplementedError("target not implemented yet: %r" % (target,))
 
 
@@ -47,6 +54,9 @@ def run(qasm_str: str, target: str, shots: int) -> Dict[str, Any]:
         return _run_spinq(qasm_str, shots)
     if target == "braket":
         return _run_braket(qasm_str, shots)
+    if target == "originq":
+        # 本源后端独立模块：pyqpanda CPUQVM 执行，返回统一 Schema
+        return originq_backend.run(qasm_str, target, shots)
     raise NotImplementedError("target not implemented yet: %r" % (target,))
 
 
