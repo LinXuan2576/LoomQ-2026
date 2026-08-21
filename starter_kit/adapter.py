@@ -22,6 +22,7 @@ import types
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Tuple
 
+import hybrid_compiler
 import originq_backend
 
 
@@ -435,7 +436,18 @@ def agent_chat(prompt: str) -> str:
 
 
 def compile_hybrid(hybrid_qasm_str: str) -> Tuple[List[str], str]:
-    """Optional L3 entry point. Return quantum operations and RISC-V assembly."""
-    raise NotImplementedError(
-        "L3 is optional; implement compile_hybrid(hybrid_qasm_str) to enter"
-    )
+    """L3: 输入 Hybrid-QASM，返回 (量子操作序列, RISC-V 汇编文本)。
+
+    量子操作序列与 _parse_qasm2 的 ops 同构：
+      ("gate", 门名, [参数...], [qubit 全局索引...])
+      ("measure", [qubit 索引...], [clbit 索引...])
+    可直接喂给 _run_spinq_sim 做语义等价自验。
+
+    RISC-V 汇编由 hybrid_compiler.compile_classical 生成，仅用
+    li/add/sub/addi/beq/bne/j 七条指令，官方 riscv_emulator.py 可运行。
+    """
+    quantum_text, classical_text = hybrid_compiler.split_hybrid(hybrid_qasm_str)
+    # _parse_qasm2 返回 (qubit 总数, clbit 总数, ops)，第 3 个才是操作列表
+    ops = _parse_qasm2(quantum_text)[2]
+    assembly = hybrid_compiler.compile_classical(classical_text)
+    return ops, assembly
