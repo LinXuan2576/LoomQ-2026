@@ -431,8 +431,12 @@ def _run_braket(qasm_str: str, shots: int) -> Dict[str, Any]:
 
 
 def agent_chat(prompt: str) -> str:
-    """Optional L2 entry point using the documented LOOMQ_LLM_* environment."""
-    raise NotImplementedError("L2 is optional; implement agent_chat(prompt) to enter")
+    """L2 entry point — 完整实现见 l2_agent.py(方案 A:LLM 生成 + 模拟器自验闭环)。
+
+    读 LOOMQ_LLM_* 环境变量(正式评测由组委会注入);本地调试时加载同目录 .env.local。
+    """
+    import l2_agent
+    return l2_agent.agent_chat(prompt)
 
 
 def compile_hybrid(hybrid_qasm_str: str) -> Tuple[List[str], str]:
