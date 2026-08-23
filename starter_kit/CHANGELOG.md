@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Team LinXuan2576 · D5 交付（2026-08-23）
+
+- Add `cli.py` — interactive L2 entry point: natural-language dialogue, paste-QASM path, offline `/run`, ASCII result visualization; zero third-party dependencies.
+- Add `riscv_emulator_qext.py` — custom quantum RISC-V extension (Q-Ext: `qh/qx/qcx/qrz/qmeas`), fork of the official emulator with full backward compatibility; 6 end-to-end tests pass.
+- Add `docs/riscv-quantum-ext.md` — instruction encoding spec (opcode `0x77`, R/I-type layouts).
+- Add `docs/FIRST_RUN.md` — zero-background first-run guide.
+- Rewrite root `README.md` as the team project README (architecture, one-command setup/run, evidence index).
+- Fill `evidence/README.md` — declare L2 interaction, engineering/product, RISC-V Bonus, and newbie-guide Bonus.
+- Keep official `riscv_emulator.py` untouched (official evaluator imports it directly).
+
+### Official starter kit
+
 - Use the importable `starter_kit/` name for the submission root.
 - Add `__init__.py` so tests can use `from starter_kit import adapter` directly.
 

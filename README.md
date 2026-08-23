@@ -1,88 +1,112 @@
-# LoomQ · 量子接入平权计划：赛题发布包
+# LoomQ 量子接入平权计划 · LoomQ-Agent
 
-> SheNicest 2026 夏季千人烈变黑客松 · 正式赛题（选手分发版）
+> LoomQ 2026 黑客松参赛作品 —— 把统一格式的量子电路翻译成三家量子云平台的方言（量旋 SpinQ / AWS Braket / 本源 OriginQ），并用自然语言 AI 助手让**零量子背景的人第一次跑通量子电路**。
+>
+> Team ID：`LinXuan2576` ｜ 提交内容：`starter_kit/`
 
-## 包内容
+---
 
-| 文件 / 目录 | 说明 |
-|---|---|
-| `LoomQ-赛题手册.pdf` | 正式题面，用于官网发布与选手下载 |
-| `LoomQ-赛题.html` | 题面网页版（零依赖单文件：无 CDN、无外部字体、无框架），可直接作为活动官网赛题页部署 |
-| `problem_statement.md` | 题面 Markdown 源，与 PDF 内容一致，便于线上阅读与检索 |
-| `LoomQ-赛题.docx` | 题面 Word 版（由 Markdown 源生成，公式为 Word 原生对象），供组委会流转编辑 |
-| `LoomQ-选手提交流程图.png` | 最终提交流程信息图，适合单独转发给选手 |
-| `starter_kit/` | 选手工具包 v1.1.0：提交清单、人工评分证据模板、L2 环境协议、公开自测、容器基线、RISC-V 模拟器、公开电路与上手资料 |
+## 这个工具让谁第一次用上了量子计算？
 
-## 最终提交流程图
+**答：完全不懂量子计算的普通开发者。**
 
-![LoomQ 最终提交流程](LoomQ-选手提交流程图.png)
+使用方式：打开终端，说一句人话——"生成一个贝尔态电路并运行"。剩下的全部由工具完成：
 
-## 人工评分需要提交什么
-
-自动评分会直接运行 `starter_kit/` 中的程序。若要申报人工评分或 Bonus，只需填写 [`starter_kit/evidence/README.md`](starter_kit/evidence/README.md)。截图、原始结果或图表可以统一放入 `starter_kit/evidence/files/`。
-
-| 评分项 | 选手需要说明什么 | 可附材料 |
-|---|---|---|
-| L1 真机，最高 10 分 | 平台、job ID、运行时间、shots、实际执行的 QASM 和原始结果路径 | 任务页截图 |
-| L2 交互体验，最高 10 分 | 界面或 CLI 的启动方法，以及 3 个用户体验任务 | 关键流程截图或演示视频 |
-| 工程与产品复核，人工部分最高 5 分 | 构建和启动方法、主要模块、目标用户和完整使用流程 | 架构图、产品截图或已有项目文档 |
-| 自定义量子 RISC-V，最高加 8 分 | 指令编码规格、模拟器实现位置和端到端测试命令 | 无需额外材料，三项齐全且测试通过即可 |
-| 新手引导与视觉叙事，最高加 4 分 | 首次运行、概念解释、结果可视化、错误恢复或无障碍引导的位置 | 对应截图 |
-
-已有项目 README 或文档可以直接引用，不必为了评分重复写一份。工作人员只核验截止时归档的 commit，不接受截止后补交。截图不能代替可追溯的 job ID、原始结果或可运行代码。不要提交 API Key、Token、Cookie 或个人隐私。完整归档不得超过 100 MiB，大视频请使用稳定只读链接。
-
-## 常见问题
-
-### 需要参加线下答辩吗？
-
-不需要。这是线上比赛，不设置线下答辩、现场演示或到场环节。选手只需按提交流程在截止时间前完成线上提交；组委会将依据归档代码、自动评测结果和已提交的证据材料进行评分与复核。
-
-### 需要提前登记队伍名单吗？
-
-不需要。每队指定一个 GitHub 提交账号，该账号的用户名就是本次比赛的 Team ID。fork 必须归该账号所有，最终提交 Issue 也必须由同一账号创建。
-
-### 多人团队如何协作？
-
-其他成员可以作为 fork 仓库的 collaborator、通过分支或 Pull Request 参与开发。只有最终提交动作需要由指定的 GitHub 提交账号完成。
-
-### 正式提交的内容放在哪里？
-
-统一放在 fork 的 `starter_kit/` 中。组委会只把该目录提取为正式评测根目录。
-
-### 人工评分证据必须提交吗？
-
-证据包本身是可选的。若要申报 L1 真机、L2 交互体验、工程与产品化或 Bonus，直接填写 [`starter_kit/evidence/README.md`](starter_kit/evidence/README.md) 即可。需要的附件统一放进 `starter_kit/evidence/files/`。未申报某项或未提交对应证据，只影响该项人工分，不影响自动评分。
-
-### 提交前要运行什么？
-
-在 fork 根目录运行：
-
-```bash
-python3 starter_kit/prepare_submission.py --team-id <GITHUB_USERNAME>
+```
+你：生成一个2比特贝尔态电路
+Agent：自动写出 OpenQASM → 模拟器自验（Fidelity ≥ 0.97）→ 自动选后端 → 运行
+输出：  "00" ████████████████████  49.8%
+        "11" ████████████████████  50.2%
 ```
 
-预检会确认工作区干净、HEAD 已推送、fork 所有者与 Team ID 一致，并输出可填写到 Issue Form 的仓库地址和 40 位 commit SHA。
+不需要懂门电路、不需要懂量子云 SDK、不需要注册任何云平台账号。
+新手教程见 [`docs/FIRST_RUN.md`](starter_kit/docs/FIRST_RUN.md) 与 [`starter_kit/QUANTUM_101.md`](starter_kit/QUANTUM_101.md)。
 
-### 如何确认提交成功？
+## 快速开始（一键 setup + run）
 
-最终提交 Issue 获得 `submission:accepted` 标签，并出现包含 commit、归档 SHA-256 和 Artifact ID 的自动回执，才算有效提交。仅创建 Issue 或通过本地预检不代表提交成功。
+```bash
+# 1. 安装依赖（Python 3.10）
+cd starter_kit
+pip install -r requirements.txt
 
-### 提交后还能更新吗？
+# 2. 启动交互助手（自然语言量子电路编程）
+python cli.py
 
-可以。修改代码并 push 后重新创建一个最终提交 Issue，不要编辑旧 Issue。截止前最后一次通过校验的提交生效。
+# 3. 或者离线直接跑本地电路文件
+python cli.py --run circuits/bell.qasm braket 8192
+```
 
-### 截止时间如何判定？
+启动后输入自然语言即可对话，输入 `/help` 查看全部命令，`/exit` 退出。
 
-截止时间是 **2026-08-25 12:00 UTC+8**，以 GitHub 服务器记录的 Issue `created_at` 为准，不看 commit 时间或本地电脑时间。
+## 功能全景
 
-### L2 会提前提供组委会 API 或 Key 吗？
+| 模块 | 文件 | 说明 | 状态 |
+|---|---|---|---|
+| L1 统一转译 + 执行 | `adapter.py` | OpenQASM 2.0 → 三平台方言 + 统一结果 Schema，12 门白名单 | ✅ |
+| 量旋后端 | `adapter.py`（spinq） | spinqit 真路径 + 无依赖模拟器双模自动降级 | ✅ |
+| Braket 后端 | `adapter.py`（braket） | QASM2→QASM3 改写 + LocalSimulator | ✅ |
+| 本源后端 | `originq_backend.py` | QASM → OriginIR + pyqpanda CPUQVM | ✅ |
+| L2 自然语言 Agent | `l2_agent.py` | LLM 生成 + 模拟器自验闭环 + 规则选后端 | ✅ |
+| L3 混合编译器 | `hybrid_compiler.py` | Hybrid-QASM 三段式编译（词法/语法/代码生成）→ RISC-V | ✅ |
+| **L2 交互入口** | **`cli.py`** | 自然语言对话 / 粘贴 QASM / 离线命令，ASCII 可视化 | ✅ 本作品新增 |
+| **RISC-V 量子扩展** | `riscv_emulator_qext.py` | Q-Ext 指令集：H/X/CNOT/RZ/测量，6 项端到端测试 | ✅ 本作品新增 |
 
-不会。赛前可使用自己的 DeepSeek Key 或其他 OpenAI-compatible 服务调试，但代码必须读取 `LOOMQ_LLM_*` 环境变量。正式评测由组委会统一注入 DeepSeek 模型服务和调用预算。
+## 架构
 
-### 可以依赖其他外部 API 吗？
+```
+┌────────────── 统一输入：OpenQASM 2.0 / Hybrid-QASM / 自然语言 ──────────────┐
+│                                                                             │
+│   cli.py（交互入口）                                                         │
+│   ├── 自然语言 → l2_agent.py（LLM 生成 → 模拟器自验 → 纠错重试闭环）           │
+│   └── QASM/文件  →  adapter.py（统一转译 + 执行，统一结果 Schema）             │
+│                      ├── spinq   后端（spinqit / 内置模拟器）                 │
+│                      ├── braket  后端（QASM3 + LocalSimulator）               │
+│                      └── originq 后端（OriginIR + pyqpanda）                 │
+│   hybrid_compiler.py（L3：词法 → 语法 → RISC-V 代码生成）                     │
+│   riscv_emulator_qext.py（Q-Ext 量子扩展指令模拟器，Bonus）                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
-不建议。正式评测环境不保证能够访问模型服务以外的外部网络地址。
+**统一结果 Schema**（三个后端输出完全一致）：`{backend, job_id, shots, counts(小端序), bit_order, timestamp, meta}`。
 
-### fork 或分支在截止后被删除怎么办？
+**关键设计**：
+- 位序统一：三后端 counts 一律转成 little-endian（c[0] 最右），避免随机电路评测挂
+- 依赖解耦：spinq 后端不依赖 antlr（与 braket 的 antlr 版本死锁问题绕开），缺失依赖时自动降级内置模拟器
+- L2 自验闭环：模型生成 → 自家模拟器跑 8192 shots 验证期望态分布 → 不达标自动回喂修正
 
-每次有效提交都会即时归档为 GitHub Actions Artifact。组委会截止后从归档收集，不依赖 fork 在评分时仍然存在；选手仍应保留 fork 便于复核。
+## 使用示例
+
+```bash
+# 交互对话（推荐体验）
+python cli.py
+LoomQ-Agent > 生成一个3比特GHZ纠缠态并运行
+
+# 单轮演示（脚本/评分友好）
+python cli.py --once "生成一个2比特贝尔态电路"
+
+# 离线跑本地文件（不依赖网络/模型）
+python cli.py --run circuits/bell.qasm spinq 8192
+```
+
+## 人工评分证据
+
+按组委会模板逐项申报于 [`starter_kit/evidence/README.md`](starter_kit/evidence/README.md)：
+
+- **L2 交互体验**：`cli.py` 入口 + 3 个用户任务
+- **工程与产品化**：本 README + 架构说明 + 必答题
+- **自定义量子 RISC-V Bonus**：规格 [`docs/riscv-quantum-ext.md`](starter_kit/docs/riscv-quantum-ext.md) + 实现 `riscv_emulator_qext.py` + 端到端测试
+- **新手引导 Bonus**：`docs/FIRST_RUN.md`（首次运行）+ `QUANTUM_101.md`（概念）+ CLI 结果可视化
+
+## 文档索引
+
+| 文档 | 内容 |
+|---|---|
+| [`starter_kit/QUANTUM_101.md`](starter_kit/QUANTUM_101.md) | 量子概念零基础解释（门/叠加/纠缠/测量） |
+| [`starter_kit/backend_capabilities.md`](starter_kit/backend_capabilities.md) | 三平台后端能力表 |
+| [`starter_kit/gate_identities.md`](starter_kit/gate_identities.md) | 12 门白名单与平台门名映射 |
+| [`starter_kit/target_ir_contract.md`](starter_kit/target_ir_contract.md) | 目标 IR 契约 |
+| [`starter_kit/docs/FIRST_RUN.md`](starter_kit/docs/FIRST_RUN.md) | 零基础首次运行指南 |
+| [`starter_kit/docs/riscv-quantum-ext.md`](starter_kit/docs/riscv-quantum-ext.md) | Q-Ext 量子扩展指令规格（Bonus） |
+| [`starter_kit/CHANGELOG.md`](starter_kit/CHANGELOG.md) | 开发日志 |
+
+> 说明：`starter_kit/README.md` 为组委会官方工具包说明，原样保留。
