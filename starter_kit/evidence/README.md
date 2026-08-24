@@ -21,7 +21,7 @@ Team ID：`LinXuan2576`。本文件按组委会模板填写，申报 L2 交互�
 shots：8192（待平台详情页确认后回填）
 实际执行的 QASM：starter_kit/evidence/files/bell-qcloud.qasm
 平台返回的原始结果：starter_kit/evidence/files/spinq-nmr-result.json
-任务页截图：待补充（平台任务详情页）
+任务页截图：starter_kit/evidence/files/spinq-bell-2bit-report.png
 ```
 
 结果摘要（完整见 `spinq-nmr-result.json`）：
