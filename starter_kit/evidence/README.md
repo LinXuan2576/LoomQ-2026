@@ -23,7 +23,8 @@ shots：8192（待平台详情页确认后回填）
 平台返回的原始结果：starter_kit/evidence/files/spinq-nmr-result.json
 平台官方任务结果（msgpack 原始格式）：
   starter_kit/evidence/files/spinq-task-result-G-260823-0016.msgpack
-任务页截图：starter_kit/evidence/files/spinq-bell-2bit-report.png
+电路图：starter_kit/evidence/files/spinq-bell-2bit-circuit.png（2bit Bell 态线路图）
+任务页截图：待补充（实验报告全图截图）
 ```
 
 结果摘要（完整见 `spinq-nmr-result.json`）：
