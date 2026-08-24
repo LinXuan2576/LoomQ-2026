@@ -21,6 +21,8 @@ Team ID：`LinXuan2576`。本文件按组委会模板填写，申报 L2 交互�
 shots：8192（待平台详情页确认后回填）
 实际执行的 QASM：starter_kit/evidence/files/bell-qcloud.qasm
 平台返回的原始结果：starter_kit/evidence/files/spinq-nmr-result.json
+平台官方任务结果（msgpack 原始格式）：
+  starter_kit/evidence/files/spinq-task-result-G-260823-0016.msgpack
 任务页截图：starter_kit/evidence/files/spinq-bell-2bit-report.png
 ```
 
@@ -35,6 +37,10 @@ shots：8192（待平台详情页确认后回填）
 
 主态 00/11 合计 67.7%。真实核磁硬件的退相干与读出误差产生杂散分布；
 纠缠特征（00 与 11 同向占优，无单比特主导态）清晰可见。
+
+另在同一平台运行 3bit 任务（job `S-260823-0003`），官方结果
+（msgpack 原始格式）归档于 `files/spinq-task-result-S-260823-0003.msgpack`，
+展示平台多比特能力；该任务不参与申报评分。
 
 ### 平台 2：本源量子云 · 悟空 WK_C180_2 超导量子计算机（5 分）
 
