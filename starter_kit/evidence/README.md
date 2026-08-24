@@ -45,7 +45,9 @@ shots：8192（待平台详情页确认后回填）
 shots：8192（平台返回概率型结果）
 实际执行的 QASM：starter_kit/evidence/files/ghz3-qcloud.qasm（经 pyqpanda3 提交）
 平台返回的原始结果：starter_kit/evidence/files/wk_c180_2-ghz3-result.json
-任务页截图：选填
+平台官方任务报告（平台导出，含起止时间/机器时间/状态）：
+  starter_kit/evidence/files/qcloud_reports/7214912EA38E2E609F7FE5E70E7C0B29.json
+任务页截图：选填（官方任务报告已覆盖同等信息）
 ```
 
 结果摘要（完整见 `wk_c180_2-ghz3-result.json`）：
@@ -62,7 +64,13 @@ shots：8192（平台返回概率型结果）
 后端选型说明：同一账号下硅臻光量子 PQPUMESH8（3 比特）经对照实验
 （Bell 2 比特 + X 单门翻转，见 `run_qcloud_controls.py`）确认所有量子门
 不执行（X(0) 实测仍为 |0⟩ 99.9%），判断该后端当前不可用，改选悟空
-WK_C180_2 提交；对照过程与原始响应均留存证据文件。
+WK_C180_2 提交；对照过程与原始响应均留存证据文件，五组任务的平台
+官方报告（含起止时间/机器时间/状态）见 `files/qcloud_reports/`：
+- PQPUMESH8 故障组：968144DF819A1E90673BE80F61EEBB6C（GHZ-3 全 000）、
+  61D061A668A4D5801BD21024119E45F0（Bell 全 00）、
+  29D0EB978DD705A2E822961614C82B3B（X 翻转仍 |0⟩ 99.9%）
+- WK_C180_2 成功组：7214912EA38E2E609F7FE5E70E7C0B29（GHZ-3 主态 99.96%）、
+  B669FC201A1C8A943D90F608522B0E76（Bell 纠缠正常）
 
 ## L2 交互体验
 
